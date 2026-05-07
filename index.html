@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Destino Transfer – Transporte & Turismo</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #1fa97a;
+    --green-dark: #157a58;
+    --green-light: #d4f5e9;
+    --orange: #f07c2a;
+    --cream: #f4f0e8;
+    --dark: #0d2a1e;
+    --mid: #2d5c45;
+    --white: #ffffff;
+    --gray: #6b7c74;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--cream);
+    color: var(--dark);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 48px;
+    background: rgba(13,42,30,0.97);
+    backdrop-filter: blur(12px);
+  }
+
+  .logo-nav {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.5px;
+  }
+  .logo-nav span { color: var(--orange); }
+
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--orange); }
+
+  .lang-toggle {
+    display: flex; gap: 4px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 3px;
+  }
+  .lang-btn {
+    padding: 5px 14px;
+    border-radius: 16px;
+    border: none;
+    background: transparent;
+    color: rgba(255,255,255,0.6);
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .lang-btn.active {
+    background: var(--orange);
+    color: white;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--dark);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 700px; height: 700px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(31,169,122,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -150px; left: -150px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(240,124,42,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-content {
+    padding: 140px 64px 80px;
+    z-index: 2;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(31,169,122,0.15);
+    border: 1px solid rgba(31,169,122,0.4);
+    color: var(--green);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2.8rem, 5vw, 4.4rem);
+    font-weight: 800;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--orange);
+    display: block;
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.7;
+    margin-bottom: 44px;
+    max-width: 400px;
+  }
+
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .btn-primary {
+    background: var(--orange);
+    color: white;
+    padding: 15px 32px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: all 0.25s;
+    border: 2px solid var(--orange);
+  }
+  .btn-primary:hover {
+    background: transparent;
+    color: var(--orange);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--white);
+    padding: 15px 32px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    transition: all 0.25s;
+    border: 2px solid rgba(255,255,255,0.2);
+  }
+  .btn-outline:hover {
+    border-color: var(--green);
+    color: var(--green);
+  }
+
+  .hero-visual {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-cards {
+    position: relative;
+    width: 380px;
+    height: 420px;
+  }
+
+  .hero-card {
+    position: absolute;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 24px;
+    backdrop-filter: blur(8px);
+  }
+
+  .hero-card-main {
+    top: 0; left: 0; right: 0;
+    background: rgba(31,169,122,0.12);
+    border-color: rgba(31,169,122,0.3);
+  }
+
+  .hero-card h3 {
+    font-family: 'Syne', sans-serif;
+    color: var(--white);
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+
+  .hero-card p {
+    color: rgba(255,255,255,0.55);
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+
+  .fleet-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .fleet-pill {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.75);
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 20px;
+  }
+
+  .hero-card-stat {
+    bottom: 40px; right: 0;
+    background: var(--orange);
+    border-color: var(--orange);
+    padding: 18px 24px;
+    text-align: center;
+    width: 160px;
+  }
+
+  .hero-card-stat .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: white;
+    line-height: 1;
+  }
+
+  .hero-card-stat p {
+    color: rgba(255,255,255,0.85);
+    font-size: 0.8rem;
+    margin-top: 4px;
+  }
+
+  /* SECTION COMMON */
+  section { padding: 100px 48px; }
+
+  .section-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--dark);
+    margin-bottom: 20px;
+  }
+
+  .section-title span { color: var(--green); }
+
+  .section-desc {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: var(--gray);
+    line-height: 1.75;
+    max-width: 520px;
+  }
+
+  /* ABOUT */
+  .about {
+    background: var(--white);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .about-visual {
+    position: relative;
+  }
+
+  .about-bg-block {
+    width: 100%;
+    height: 400px;
+    background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 24px;
+    padding: 40px;
+    color: white;
+    text-align: center;
+  }
+
+  .about-bg-block .big-icon {
+    font-size: 4rem;
+  }
+
+  .about-bg-block h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+  }
+
+  .about-bg-block p {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    line-height: 1.7;
+  }
+
+  .about-float {
+    position: absolute;
+    bottom: -24px;
+    right: -24px;
+    background: var(--orange);
+    color: white;
+    border-radius: 12px;
+    padding: 20px 28px;
+    font-family: 'Syne', sans-serif;
+  }
+
+  .about-float .n { font-size: 2.2rem; font-weight: 800; }
+  .about-float .l { font-size: 0.82rem; opacity: 0.9; }
+
+  /* WHY */
+  .why {
+    background: var(--dark);
+    text-align: center;
+  }
+
+  .why .section-title { color: var(--white); }
+  .why .section-desc { margin: 0 auto; color: rgba(255,255,255,0.5); }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    margin-top: 64px;
+    text-align: left;
+  }
+
+  .why-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 32px 28px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .why-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--green);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: left;
+  }
+
+  .why-card:hover { border-color: rgba(31,169,122,0.3); background: rgba(31,169,122,0.06); }
+  .why-card:hover::before { transform: scaleX(1); }
+
+  .why-icon {
+    width: 48px; height: 48px;
+    background: rgba(31,169,122,0.15);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+  }
+
+  .why-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+
+  .why-card p {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+  }
+
+  /* SERVICES */
+  .services { background: var(--cream); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 56px;
+  }
+
+  .service-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 40px 32px;
+    border: 2px solid transparent;
+    transition: all 0.3s;
+    cursor: default;
+  }
+
+  .service-card:hover {
+    border-color: var(--green);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 50px rgba(31,169,122,0.12);
+  }
+
+  .service-icon {
+    font-size: 2.4rem;
+    margin-bottom: 20px;
+  }
+
+  .service-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 14px;
+  }
+
+  .service-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .service-items li {
+    font-size: 0.9rem;
+    color: var(--gray);
+    padding-left: 18px;
+    position: relative;
+  }
+
+  .service-items li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--green);
+    font-weight: bold;
+  }
+
+  /* FLEET */
+  .fleet {
+    background: var(--white);
+  }
+
+  .fleet-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    margin-bottom: 64px;
+  }
+
+  .fleet-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .fleet-card {
+    background: var(--cream);
+    border-radius: 16px;
+    padding: 28px 22px;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: all 0.3s;
+  }
+
+  .fleet-card:hover {
+    border-color: var(--orange);
+    transform: translateY(-3px);
+  }
+
+  .fleet-emoji { font-size: 2.5rem; margin-bottom: 12px; }
+
+  .fleet-card .vehicle-type {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+
+  .fleet-card .capacity {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--green);
+    background: var(--green-light);
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 20px;
+    margin-top: 6px;
+  }
+
+  /* HOW */
+  .how { background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%); }
+
+  .how .section-title { color: white; }
+  .how .section-desc { color: rgba(255,255,255,0.7); }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+    margin-top: 64px;
+    position: relative;
+  }
+
+  .steps::before {
+    content: '';
+    position: absolute;
+    top: 30px;
+    left: 12%;
+    right: 12%;
+    height: 1px;
+    background: rgba(255,255,255,0.2);
+  }
+
+  .step {
+    text-align: center;
+    position: relative;
+  }
+
+  .step-num {
+    width: 60px; height: 60px;
+    background: var(--orange);
+    color: white;
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 20px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .step h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 8px;
+  }
+
+  .step p {
+    font-size: 0.86rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.6;
+  }
+
+  /* COVERAGE */
+  .coverage {
+    background: var(--cream);
+    text-align: center;
+  }
+
+  .coverage .section-desc { margin: 0 auto 56px; }
+
+  .countries {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .country-tag {
+    background: var(--white);
+    border: 2px solid var(--green-light);
+    border-radius: 12px;
+    padding: 16px 28px;
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.25s;
+  }
+
+  .country-tag:hover {
+    background: var(--green);
+    color: white;
+    border-color: var(--green);
+    transform: scale(1.04);
+  }
+
+  .country-flag { font-size: 1.5rem; }
+
+  /* CONTACT */
+  .contact {
+    background: var(--dark);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .contact .section-title { color: white; }
+  .contact .section-desc { color: rgba(255,255,255,0.5); margin-bottom: 40px; }
+
+  .contact-channels {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .contact-channel {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 18px 24px;
+    text-decoration: none;
+    transition: all 0.25s;
+  }
+
+  .contact-channel:hover {
+    background: rgba(31,169,122,0.1);
+    border-color: rgba(31,169,122,0.4);
+    transform: translateX(6px);
+  }
+
+  .channel-icon {
+    width: 44px; height: 44px;
+    background: var(--green);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .channel-info .label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+
+  .channel-info .value {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+  }
+
+  .contact-form-panel {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 40px;
+  }
+
+  .form-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 28px;
+  }
+
+  .form-group { margin-bottom: 18px; }
+
+  .form-group label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    padding: 13px 16px;
+    color: white;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--green); }
+
+  .form-group select option { background: var(--dark); }
+
+  .form-group textarea { resize: none; height: 90px; }
+
+  .form-submit {
+    width: 100%;
+    background: var(--orange);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 15px;
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: all 0.25s;
+    margin-top: 8px;
+  }
+
+  .form-submit:hover { background: #d96a18; transform: translateY(-1px); }
+
+  /* FOOTER */
+  footer {
+    background: #050f09;
+    padding: 40px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: white;
+  }
+
+  .footer-logo span { color: var(--orange); }
+
+  .footer-tagline {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.3);
+    margin-top: 4px;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 12px;
+  }
+
+  .social-btn {
+    width: 38px; height: 38px;
+    background: rgba(255,255,255,0.07);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .social-btn:hover { background: var(--green); }
+
+  .footer-copy {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.25);
+  }
+
+  /* LANG HIDDEN */
+  [data-lang="en"] { display: none; }
+  body.lang-en [data-lang="en"] { display: block; }
+  body.lang-en [data-lang="es"] { display: none; }
+  .inline-lang { display: none; }
+  body.lang-en .inline-lang-en { display: inline; }
+  body.lang-es .inline-lang-es { display: inline; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up { animation: fadeUp 0.7s ease both; }
+  .fade-up-1 { animation-delay: 0.1s; }
+  .fade-up-2 { animation-delay: 0.25s; }
+  .fade-up-3 { animation-delay: 0.4s; }
+  .fade-up-4 { animation-delay: 0.55s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    section { padding: 70px 24px; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-content { padding: 120px 24px 40px; }
+    .hero-visual { display: none; }
+    .about, .contact { grid-template-columns: 1fr; }
+    .about-visual { display: none; }
+    .services-grid { grid-template-columns: 1fr; }
+    .fleet-intro { grid-template-columns: 1fr; gap: 40px; }
+    .fleet-grid { grid-template-columns: repeat(2, 1fr); }
+    .steps { grid-template-columns: repeat(2, 1fr); }
+    .steps::before { display: none; }
+    footer { flex-direction: column; gap: 16px; text-align: center; }
+  }
+</style>
+</head>
+<body class="lang-es">
+
+<!-- NAV -->
+<nav>
+  <div class="logo-nav">Destino<span>Transfer</span></div>
+  <div class="nav-links">
+    <a href="#about" data-nav-about>¿Quiénes somos?</a>
+    <a href="#services" data-nav-services>Servicios</a>
+    <a href="#fleet" data-nav-fleet>Flota</a>
+    <a href="#coverage" data-nav-coverage>Cobertura</a>
+    <a href="#contact" data-nav-contact>Contacto</a>
+  </div>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('es')">ES</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-badge fade-up fade-up-1" id="hero-badge">Transporte & Turismo · Paraguay</div>
+    <h1 class="fade-up fade-up-2">
+      <span id="hero-h1a">Traslados</span><br>
+      <em id="hero-h1b">Seguros,<br>Confiables.</em>
+    </h1>
+    <p class="hero-sub fade-up fade-up-3" id="hero-sub">
+      Empresa especializada en traslados privados y corporativos. Flota propia, conductores profesionales y cobertura nacional e internacional.
+    </p>
+    <div class="hero-btns fade-up fade-up-4">
+      <a href="#contact" class="btn-primary" id="hero-cta1">Solicitar cotización</a>
+      <a href="#services" class="btn-outline" id="hero-cta2">Nuestros servicios</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-cards">
+      <div class="hero-card hero-card-main">
+        <h3 id="hc-fleet-title">Nuestra Flota</h3>
+        <p id="hc-fleet-desc">Vehículos habilitados, confortables y asegurados para cada necesidad.</p>
+        <div class="fleet-pills">
+          <span class="fleet-pill">SUV · 4 pax</span>
+          <span class="fleet-pill">Mini Van · 7 pax</span>
+          <span class="fleet-pill">VAN · 16 pax</span>
+          <span class="fleet-pill">Mini Bus · 30 pax</span>
+          <span class="fleet-pill">Bus · 46 pax</span>
+        </div>
+      </div>
+      <div class="hero-card hero-card-stat">
+        <div class="stat-num">5</div>
+        <p id="hc-countries">países<br>cubiertos</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-visual">
+    <div class="about-bg-block">
+      <div class="big-icon">🚐</div>
+      <h3 id="about-visual-title">Planificación · Puntualidad · Profesionalismo</h3>
+      <p id="about-visual-desc">Seguimiento satelital en todo el trayecto para garantizar tu seguridad y tranquilidad.</p>
+    </div>
+    <div class="about-float">
+      <div class="n">+5</div>
+      <div class="l" id="about-float-label">países de cobertura</div>
+    </div>
+  </div>
+  <div>
+    <div class="section-label" id="about-label">¿Quiénes somos?</div>
+    <h2 class="section-title" id="about-title">Expertos en <span>movilidad</span> privada y corporativa</h2>
+    <p class="section-desc" id="about-desc">
+      Somos una empresa especializada en traslados privados y corporativos, con flota propia y conductores profesionales. Brindamos soluciones de movilidad para empresas, instituciones, organizaciones y grupos.<br><br>
+      Trabajamos con planificación, puntualidad y atención personalizada para garantizar viajes seguros y sin preocupaciones.
+    </p>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why" id="why">
+  <div class="section-label" id="why-label">¿Por qué elegirnos?</div>
+  <h2 class="section-title" id="why-title">Lo que nos <span>diferencia</span></h2>
+  <p class="section-desc" id="why-desc">Cada detalle pensado para que tu viaje sea seguro, cómodo y sin sorpresas.</p>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">🚗</div>
+      <h3 id="w1-title">Flota propia y moderna</h3>
+      <p id="w1-desc">Vehículos habilitados, confortables, en excelente estado y asegurados.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">📍</div>
+      <h3 id="w2-title">Viajes programados y a medida</h3>
+      <p id="w2-desc">Nos adaptamos a horarios, recorridos y necesidades específicas de cada cliente.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">👨‍✈️</div>
+      <h3 id="w3-title">Conductores profesionales</h3>
+      <p id="w3-desc">Capacitados, responsables, con experiencia y antecedentes impecables.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🛡️</div>
+      <h3 id="w4-title">Atención personalizada</h3>
+      <p id="w4-desc">Cuidado y contacto directo antes, durante y después del viaje.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🌍</div>
+      <h3 id="w5-title">Cobertura internacional</h3>
+      <p id="w5-desc">Viajes en todo Paraguay y hacia Argentina, Brasil, Bolivia y Uruguay.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">📡</div>
+      <h3 id="w6-title">Seguimiento satelital</h3>
+      <p id="w6-desc">Acompañamos cada trayecto con tecnología GPS y soporte en tiempo real.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-label" id="serv-label">Nuestros servicios</div>
+  <h2 class="section-title" id="serv-title">Todo tipo de <span>traslados</span></h2>
+  <p class="section-desc" id="serv-desc">Desde aeropuerto hasta viajes internacionales — cubrimos todas tus necesidades de transporte.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🏢</div>
+      <h3 id="s1-title">Traslados Corporativos</h3>
+      <ul class="service-items" id="s1-items">
+        <li>Aeropuerto in/out</li>
+        <li>Full day para ejecutivos</li>
+        <li>Eventos, capacitaciones, congresos</li>
+        <li>Trabajo de campo</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🌴</div>
+      <h3 id="s2-title">Viajes Especiales y Turísticos</h3>
+      <ul class="service-items" id="s2-items">
+        <li>Vacaciones</li>
+        <li>Viajes regionales</li>
+        <li>Salidas recreativas y celebraciones</li>
+        <li>Bodas, cumpleaños y despedidas</li>
+      </ul>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">👥</div>
+      <h3 id="s3-title">Traslados para Grupos</h3>
+      <ul class="service-items" id="s3-items">
+        <li>Escuelas y colegios</li>
+        <li>Viajes de estudio o trabajo</li>
+        <li>Grupos familiares o de amigos</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FLEET -->
+<section class="fleet" id="fleet">
+  <div class="fleet-intro">
+    <div>
+      <div class="section-label" id="fleet-label">Nuestra flota</div>
+      <h2 class="section-title" id="fleet-title">El vehículo <span>adecuado</span> para cada viaje</h2>
+      <p class="section-desc" id="fleet-desc">Contamos con una flota variada para adaptarnos a grupos de cualquier tamaño, desde 4 hasta 46 pasajeros.</p>
+    </div>
+    <div></div>
+  </div>
+  <div class="fleet-grid">
+    <div class="fleet-card"><div class="fleet-emoji">🚙</div><div class="vehicle-type">SUV</div><div class="capacity">4 pax</div></div>
+    <div class="fleet-card"><div class="fleet-emoji">🚐</div><div class="vehicle-type">Mini Van Ejecutiva</div><div class="capacity">7 pax</div></div>
+    <div class="fleet-card"><div class="fleet-emoji">🚌</div><div class="vehicle-type">VAN</div><div class="capacity">16 pax</div></div>
+    <div class="fleet-card"><div class="fleet-emoji">🚌</div><div class="vehicle-type" id="fleet-v4">Mini Bus</div><div class="capacity">18 pax</div></div>
+    <div class="fleet-card"><div class="fleet-emoji">🚌</div><div class="vehicle-type" id="fleet-v5">Mini Bus</div><div class="capacity">30 pax</div></div>
+    <div class="fleet-card"><div class="fleet-emoji">🚍</div><div class="vehicle-type" id="fleet-v6">Bus</div><div class="capacity">46 pax</div></div>
+  </div>
+</section>
+
+<!-- HOW WE WORK -->
+<section class="how" id="how">
+  <div class="section-label" id="how-label">¿Cómo trabajamos?</div>
+  <h2 class="section-title" id="how-title">Simple, claro y <span style="color:var(--orange)">eficiente</span></h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3 id="step1-title">Coordinamos</h3>
+      <p id="step1-desc">Coordinamos el viaje según tus necesidades específicas.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3 id="step2-title">Definimos</h3>
+      <p id="step2-desc">Definimos horarios, recorridos y cantidad de pasajeros.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3 id="step3-title">Asignamos</h3>
+      <p id="step3-desc">Asignamos el móvil adecuado para cada servicio.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h3 id="step4-title">Acompañamos</h3>
+      <p id="step4-desc">Todo el trayecto con seguimiento satelital y soporte.</p>
+    </div>
+  </div>
+</section>
+
+<!-- COVERAGE -->
+<section class="coverage" id="coverage">
+  <div class="section-label" id="cov-label">Cobertura</div>
+  <h2 class="section-title" id="cov-title">Nacional e <span>Internacional</span></h2>
+  <p class="section-desc" id="cov-desc">Operamos en todo Paraguay y cruzamos fronteras hacia los países de la región.</p>
+  <div class="countries">
+    <div class="country-tag"><span class="country-flag">🇵🇾</span> Paraguay</div>
+    <div class="country-tag"><span class="country-flag">🇦🇷</span> Argentina</div>
+    <div class="country-tag"><span class="country-flag">🇧🇷</span> Brasil</div>
+    <div class="country-tag"><span class="country-flag">🇧🇴</span> Bolivia</div>
+    <div class="country-tag"><span class="country-flag">🇺🇾</span> Uruguay</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div>
+    <div class="section-label" id="cont-label">Contacto</div>
+    <h2 class="section-title" id="cont-title">¿Listo para <span>viajar?</span></h2>
+    <p class="section-desc" id="cont-desc">Contáctanos y cotizamos tu traslado sin compromiso. Respondemos rápido.</p>
+    <div class="contact-channels">
+      <a href="tel:+595971377060" class="contact-channel">
+        <div class="channel-icon">📞</div>
+        <div class="channel-info">
+          <div class="label" id="ch1-label">Teléfono / WhatsApp</div>
+          <div class="value">(0971) 377-060</div>
+        </div>
+      </a>
+      <a href="https://www.facebook.com/TransferDestino" target="_blank" class="contact-channel">
+        <div class="channel-icon">📘</div>
+        <div class="channel-info">
+          <div class="label">Facebook</div>
+          <div class="value">Transfer Destino</div>
+        </div>
+      </a>
+      <a href="https://www.instagram.com/destinotransferpy" target="_blank" class="contact-channel">
+        <div class="channel-icon">📷</div>
+        <div class="channel-info">
+          <div class="label">Instagram</div>
+          <div class="value">@destinotransferpy</div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="contact-form-panel">
+    <div class="form-title" id="form-title">Solicitar cotización</div>
+    <div class="form-group">
+      <label id="f-name-label">Nombre</label>
+      <input type="text" id="f-name" placeholder="Tu nombre completo">
+    </div>
+    <div class="form-group">
+      <label id="f-phone-label">Teléfono / WhatsApp</label>
+      <input type="tel" id="f-phone" placeholder="+595 ...">
+    </div>
+    <div class="form-group">
+      <label id="f-service-label">Tipo de servicio</label>
+      <select id="f-service">
+        <option value="" id="f-opt0">— Seleccionar —</option>
+        <option id="f-opt1">Traslado corporativo</option>
+        <option id="f-opt2">Viaje especial / turístico</option>
+        <option id="f-opt3">Traslado grupal</option>
+        <option id="f-opt4">Otro</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label id="f-msg-label">Mensaje</label>
+      <textarea id="f-msg" placeholder="Destino, fecha, cantidad de pasajeros..."></textarea>
+    </div>
+    <button class="form-submit" id="f-submit">Enviar solicitud →</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">Destino<span>Transfer</span></div>
+    <div class="footer-tagline" id="footer-tag">Transporte & Turismo · Asunción, Paraguay</div>
+  </div>
+  <div class="footer-social">
+    <a href="https://www.facebook.com/TransferDestino" target="_blank" class="social-btn">📘</a>
+    <a href="https://www.instagram.com/destinotransferpy" target="_blank" class="social-btn">📷</a>
+    <a href="tel:+595971377060" class="social-btn">📞</a>
+  </div>
+  <div class="footer-copy" id="footer-copy">© 2025 Destino Transfer. Todos los derechos reservados.</div>
+</footer>
+
+<script>
+const texts = {
+  es: {
+    'hero-badge': 'Transporte & Turismo · Paraguay',
+    'hero-h1a': 'Traslados',
+    'hero-h1b': 'Seguros,<br>Confiables.',
+    'hero-sub': 'Empresa especializada en traslados privados y corporativos. Flota propia, conductores profesionales y cobertura nacional e internacional.',
+    'hero-cta1': 'Solicitar cotización',
+    'hero-cta2': 'Nuestros servicios',
+    'hc-fleet-title': 'Nuestra Flota',
+    'hc-fleet-desc': 'Vehículos habilitados, confortables y asegurados para cada necesidad.',
+    'hc-countries': 'países<br>cubiertos',
+    'about-label': '¿Quiénes somos?',
+    'about-title': 'Expertos en <span style="color:var(--green)">movilidad</span> privada y corporativa',
+    'about-desc': 'Somos una empresa especializada en traslados privados y corporativos, con flota propia y conductores profesionales. Brindamos soluciones de movilidad para empresas, instituciones, organizaciones y grupos.<br><br>Trabajamos con planificación, puntualidad y atención personalizada para garantizar viajes seguros y sin preocupaciones.',
+    'about-visual-title': 'Planificación · Puntualidad · Profesionalismo',
+    'about-visual-desc': 'Seguimiento satelital en todo el trayecto para garantizar tu seguridad y tranquilidad.',
+    'about-float-label': 'países de cobertura',
+    'why-label': '¿Por qué elegirnos?',
+    'why-title': 'Lo que nos <span style="color:var(--green)">diferencia</span>',
+    'why-desc': 'Cada detalle pensado para que tu viaje sea seguro, cómodo y sin sorpresas.',
+    'w1-title': 'Flota propia y moderna',
+    'w1-desc': 'Vehículos habilitados, confortables, en excelente estado y asegurados.',
+    'w2-title': 'Viajes programados y a medida',
+    'w2-desc': 'Nos adaptamos a horarios, recorridos y necesidades específicas de cada cliente.',
+    'w3-title': 'Conductores profesionales',
+    'w3-desc': 'Capacitados, responsables, con experiencia y antecedentes impecables.',
+    'w4-title': 'Atención personalizada',
+    'w4-desc': 'Cuidado y contacto directo antes, durante y después del viaje.',
+    'w5-title': 'Cobertura internacional',
+    'w5-desc': 'Viajes en todo Paraguay y hacia Argentina, Brasil, Bolivia y Uruguay.',
+    'w6-title': 'Seguimiento satelital',
+    'w6-desc': 'Acompañamos cada trayecto con tecnología GPS y soporte en tiempo real.',
+    'serv-label': 'Nuestros servicios',
+    'serv-title': 'Todo tipo de <span style="color:var(--green)">traslados</span>',
+    'serv-desc': 'Desde aeropuerto hasta viajes internacionales — cubrimos todas tus necesidades de transporte.',
+    's1-title': 'Traslados Corporativos',
+    's1-items': '<li>Aeropuerto in/out</li><li>Full day para ejecutivos</li><li>Eventos, capacitaciones, congresos</li><li>Trabajo de campo</li>',
+    's2-title': 'Viajes Especiales y Turísticos',
+    's2-items': '<li>Vacaciones</li><li>Viajes regionales</li><li>Salidas recreativas y celebraciones</li><li>Bodas, cumpleaños y despedidas</li>',
+    's3-title': 'Traslados para Grupos',
+    's3-items': '<li>Escuelas y colegios</li><li>Viajes de estudio o trabajo</li><li>Grupos familiares o de amigos</li>',
+    'fleet-label': 'Nuestra flota',
+    'fleet-title': 'El vehículo <span style="color:var(--green)">adecuado</span> para cada viaje',
+    'fleet-desc': 'Contamos con una flota variada para adaptarnos a grupos de cualquier tamaño, desde 4 hasta 46 pasajeros.',
+    'how-label': '¿Cómo trabajamos?',
+    'how-title': 'Simple, claro y <span style="color:var(--orange)">eficiente</span>',
+    'step1-title': 'Coordinamos',
+    'step1-desc': 'Coordinamos el viaje según tus necesidades específicas.',
+    'step2-title': 'Definimos',
+    'step2-desc': 'Definimos horarios, recorridos y cantidad de pasajeros.',
+    'step3-title': 'Asignamos',
+    'step3-desc': 'Asignamos el móvil adecuado para cada servicio.',
+    'step4-title': 'Acompañamos',
+    'step4-desc': 'Todo el trayecto con seguimiento satelital y soporte.',
+    'cov-label': 'Cobertura',
+    'cov-title': 'Nacional e <span style="color:var(--green)">Internacional</span>',
+    'cov-desc': 'Operamos en todo Paraguay y cruzamos fronteras hacia los países de la región.',
+    'cont-label': 'Contacto',
+    'cont-title': '¿Listo para <span style="color:var(--green)">viajar?</span>',
+    'cont-desc': 'Contáctanos y cotizamos tu traslado sin compromiso. Respondemos rápido.',
+    'ch1-label': 'Teléfono / WhatsApp',
+    'form-title': 'Solicitar cotización',
+    'f-name-label': 'Nombre',
+    'f-name': null,
+    'f-phone-label': 'Teléfono / WhatsApp',
+    'f-phone': null,
+    'f-service-label': 'Tipo de servicio',
+    'f-opt0': '— Seleccionar —',
+    'f-opt1': 'Traslado corporativo',
+    'f-opt2': 'Viaje especial / turístico',
+    'f-opt3': 'Traslado grupal',
+    'f-opt4': 'Otro',
+    'f-msg-label': 'Mensaje',
+    'f-msg': null,
+    'f-submit': 'Enviar solicitud →',
+    'footer-tag': 'Transporte & Turismo · Asunción, Paraguay',
+    'footer-copy': '© 2025 Destino Transfer. Todos los derechos reservados.',
+  },
+  en: {
+    'hero-badge': 'Transport & Tourism · Paraguay',
+    'hero-h1a': 'Transfers',
+    'hero-h1b': 'Safe,<br>Reliable.',
+    'hero-sub': 'Specialized company in private and corporate transfers. Own fleet, professional drivers and national & international coverage.',
+    'hero-cta1': 'Request a quote',
+    'hero-cta2': 'Our services',
+    'hc-fleet-title': 'Our Fleet',
+    'hc-fleet-desc': 'Licensed, comfortable and insured vehicles for every need.',
+    'hc-countries': 'countries<br>covered',
+    'about-label': 'Who are we?',
+    'about-title': 'Experts in <span style="color:var(--green)">private & corporate</span> mobility',
+    'about-desc': 'We are a company specialized in private and corporate transfers, with our own fleet and professional drivers. We provide mobility solutions for businesses, institutions, organizations and groups.<br><br>We work with planning, punctuality and personalized attention to ensure safe and worry-free trips.',
+    'about-visual-title': 'Planning · Punctuality · Professionalism',
+    'about-visual-desc': 'Satellite tracking throughout every journey to ensure your safety and peace of mind.',
+    'about-float-label': 'countries covered',
+    'why-label': 'Why choose us?',
+    'why-title': 'What sets us <span style="color:var(--green)">apart</span>',
+    'why-desc': 'Every detail designed so your trip is safe, comfortable and free of surprises.',
+    'w1-title': 'Modern own fleet',
+    'w1-desc': 'Licensed, comfortable vehicles in excellent condition and fully insured.',
+    'w2-title': 'Scheduled & custom trips',
+    'w2-desc': 'We adapt to schedules, routes and specific needs of each client.',
+    'w3-title': 'Professional drivers',
+    'w3-desc': 'Trained, responsible, experienced with impeccable background checks.',
+    'w4-title': 'Personalized attention',
+    'w4-desc': 'Direct care and contact before, during and after every trip.',
+    'w5-title': 'International coverage',
+    'w5-desc': 'Trips throughout Paraguay and to Argentina, Brazil, Bolivia and Uruguay.',
+    'w6-title': 'Satellite tracking',
+    'w6-desc': 'We monitor every journey with GPS technology and real-time support.',
+    'serv-label': 'Our services',
+    'serv-title': 'Every type of <span style="color:var(--green)">transfer</span>',
+    'serv-desc': 'From airport runs to international trips — we cover all your transportation needs.',
+    's1-title': 'Corporate Transfers',
+    's1-items': '<li>Airport in/out</li><li>Executive full-day service</li><li>Events, training, congresses</li><li>Fieldwork logistics</li>',
+    's2-title': 'Special & Tourist Trips',
+    's2-items': '<li>Vacations</li><li>Regional trips</li><li>Recreational & celebration outings</li><li>Weddings, birthdays, bachelorettes</li>',
+    's3-title': 'Group Transfers',
+    's3-items': '<li>Schools & colleges</li><li>Study or work trips</li><li>Family or friends groups</li>',
+    'fleet-label': 'Our fleet',
+    'fleet-title': 'The <span style="color:var(--green)">right vehicle</span> for every trip',
+    'fleet-desc': 'We have a varied fleet to accommodate groups of any size, from 4 to 46 passengers.',
+    'how-label': 'How do we work?',
+    'how-title': 'Simple, clear and <span style="color:var(--orange)">efficient</span>',
+    'step1-title': 'We coordinate',
+    'step1-desc': 'We coordinate the trip according to your specific needs.',
+    'step2-title': 'We define',
+    'step2-desc': 'We define schedules, routes and number of passengers.',
+    'step3-title': 'We assign',
+    'step3-desc': 'We assign the appropriate vehicle for each service.',
+    'step4-title': 'We accompany',
+    'step4-desc': 'The entire journey with satellite tracking and support.',
+    'cov-label': 'Coverage',
+    'cov-title': 'National & <span style="color:var(--green)">International</span>',
+    'cov-desc': 'We operate throughout Paraguay and cross borders to neighboring countries.',
+    'cont-label': 'Contact',
+    'cont-title': 'Ready to <span style="color:var(--green)">travel?</span>',
+    'cont-desc': 'Contact us and we\'ll quote your transfer with no commitment. Quick response.',
+    'ch1-label': 'Phone / WhatsApp',
+    'form-title': 'Request a quote',
+    'f-name-label': 'Full name',
+    'f-name': null,
+    'f-phone-label': 'Phone / WhatsApp',
+    'f-phone': null,
+    'f-service-label': 'Service type',
+    'f-opt0': '— Select —',
+    'f-opt1': 'Corporate transfer',
+    'f-opt2': 'Special / tourist trip',
+    'f-opt3': 'Group transfer',
+    'f-opt4': 'Other',
+    'f-msg-label': 'Message',
+    'f-msg': null,
+    'f-submit': 'Send request →',
+    'footer-tag': 'Transport & Tourism · Asunción, Paraguay',
+    'footer-copy': '© 2025 Destino Transfer. All rights reserved.',
+  }
+};
+
+const navTexts = {
+  es: { about: '¿Quiénes somos?', services: 'Servicios', fleet: 'Flota', coverage: 'Cobertura', contact: 'Contacto' },
+  en: { about: 'About us', services: 'Services', fleet: 'Fleet', coverage: 'Coverage', contact: 'Contact' }
+};
+
+const placeholders = {
+  es: { name: 'Tu nombre completo', phone: '+595 ...', msg: 'Destino, fecha, cantidad de pasajeros...' },
+  en: { name: 'Your full name', phone: '+595 ...', msg: 'Destination, date, number of passengers...' }
+};
+
+function setLang(lang) {
+  document.body.className = 'lang-' + lang;
+  document.documentElement.lang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+
+  const t = texts[lang];
+  for (const [id, val] of Object.entries(t)) {
+    if (val === null) continue;
+    const el = document.getElementById(id);
+    if (!el) continue;
+    el.innerHTML = val;
+  }
+
+  // Placeholders
+  const p = placeholders[lang];
+  document.getElementById('f-name').placeholder = p.name;
+  document.getElementById('f-phone').placeholder = p.phone;
+  document.getElementById('f-msg').placeholder = p.msg;
+
+  // Nav links
+  const nav = navTexts[lang];
+  document.querySelector('[data-nav-about]').textContent = nav.about;
+  document.querySelector('[data-nav-services]').textContent = nav.services;
+  document.querySelector('[data-nav-fleet]').textContent = nav.fleet;
+  document.querySelector('[data-nav-coverage]').textContent = nav.coverage;
+  document.querySelector('[data-nav-contact]').textContent = nav.contact;
+}
+
+// Form submit handler
+document.querySelector('.form-submit').addEventListener('click', function() {
+  const name = document.getElementById('f-name').value.trim();
+  const phone = document.getElementById('f-phone').value.trim();
+  const msg = document.getElementById('f-msg').value.trim();
+  if (!name || !phone) {
+    this.style.background = '#e55';
+    this.textContent = document.body.className.includes('en') ? 'Please fill required fields' : 'Completá nombre y teléfono';
+    setTimeout(() => {
+      this.style.background = '';
+      this.textContent = document.body.className.includes('en') ? 'Send request →' : 'Enviar solicitud →';
+    }, 2500);
+    return;
+  }
+  const service = document.getElementById('f-service').value;
+  const text = encodeURIComponent(`Hola Destino Transfer! Mi nombre es ${name}. Servicio: ${service || 'consulta general'}. ${msg}`);
+  window.open(`https://wa.me/595971377060?text=${text}`, '_blank');
+});
+</script>
+</body>
+</html>
